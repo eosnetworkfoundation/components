@@ -9,7 +9,12 @@
 
 <div>
     <h1 class="text-3xl font-bold underline">Hello world!</h1>
-    <TextField textFieldText="Enter Recipient Address or EOS Account" />
+    <TextField
+        textFieldText="Enter Recipient Address or EOS Account"
+        errorCriteria={(val) => /^0x[a-fA-F0-9]{40}$/.test(val)}
+        errorText="Incorrect wallet format."
+    />
+
 </div>
 
 <style lang="postcss">

@@ -3,6 +3,8 @@
     import { fade } from 'svelte/transition';
 
     export let textFieldText: string;
+    export let errorCriteria: (val: string) => boolean = () => true; // Default to a function that always returns true
+    export let errorText: string = 'Error'; // Default error text
 
     let value = '';
     let isFocused = false;
@@ -15,10 +17,6 @@
     const filledState =
         'w-602px h-68px font-suisse text-18px text-left bg-transparent border border-red-500 text-white focus:outline-none transition duration-500 ease-in-out rounded-lg';
 
-    const isValidWallet = (address) => {
-        return /^0x[a-fA-F0-9]{40}$/.test(address);
-    };
-
     onMount(() => {
         if (value) isFocused = true;
     });
@@ -26,14 +24,13 @@
     function handlePaste() {
         navigator.clipboard.readText().then((clipText) => {
             value = clipText;
-            isFocused = true; // Set focus to true after paste
-            isValid = isValidWallet(value); // Check if valid after paste
+            isFocused = true;
         });
     }
 
     function handleBlur() {
         isFocused = false;
-        isValid = isValidWallet(value);
+        isValid = errorCriteria(value);
     }
 </script>
 
@@ -46,13 +43,7 @@
         placeholder={textFieldText}
         on:focus={() => (isFocused = true)}
         on:blur={handleBlur}
-        class={value === ''
-            ? emptyState
-            : isFocused
-            ? focusedState
-            : isValid
-            ? emptyState
-            : filledState}
+        class={value === '' ? emptyState : isFocused ? focusedState : isValid ? emptyState : filledState}
         style="padding: 22.5px 100px 22.5px 20px;"
     />
     <button
@@ -67,7 +58,7 @@
             transition:fade={{ duration: 500 }}
             class="text-red-500 font-suisse text-18px leading-23px absolute bottom-0 transform translate-y-1/2"
         >
-            Incorrect wallet format.
+            {errorText}
         </p>
     {/if}
 </div>
