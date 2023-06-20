@@ -24,9 +24,11 @@
     function handlePaste() {
         navigator.clipboard.readText().then((clipText) => {
             value = clipText;
-            isFocused = true;
+            isFocused = false;
+            isValid = errorCriteria(value);
         });
     }
+
 
     function handleBlur() {
         isFocused = false;
@@ -53,7 +55,7 @@
     >
         Paste
     </button>
-    {#if !isFocused && !isValid && value != ''}
+    {#if !isFocused && (!isValid && value != '')}
         <p
             transition:fade={{ duration: 500 }}
             class="text-red-500 font-suisse text-18px leading-23px absolute bottom-0 transform translate-y-1/2"
