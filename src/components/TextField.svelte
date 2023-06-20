@@ -4,7 +4,7 @@
 
     export let textFieldText: string;
     export let errorCriteria: (val: string) => boolean = () => true; // Default to a function that always returns true
-    export let errorText: string = 'Error'; // Default error text
+    export let errorText = 'Error'; // Default error text
 
     let value = '';
     let isFocused = false;
@@ -29,7 +29,6 @@
         });
     }
 
-
     function handleBlur() {
         isFocused = false;
         isValid = errorCriteria(value);
@@ -45,7 +44,13 @@
         placeholder={textFieldText}
         on:focus={() => (isFocused = true)}
         on:blur={handleBlur}
-        class={value === '' ? emptyState : isFocused ? focusedState : isValid ? emptyState : filledState}
+        class={value === ''
+            ? emptyState
+            : isFocused
+            ? focusedState
+            : isValid
+            ? emptyState
+            : filledState}
         style="padding: 22.5px 100px 22.5px 20px;"
     />
     <button
@@ -55,7 +60,7 @@
     >
         Paste
     </button>
-    {#if !isFocused && (!isValid && value != '')}
+    {#if !isFocused && !isValid && value != ''}
         <p
             transition:fade={{ duration: 500 }}
             class="text-red-500 font-suisse text-18px leading-23px absolute bottom-0 transform translate-y-1/2"

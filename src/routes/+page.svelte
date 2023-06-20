@@ -14,7 +14,6 @@
         errorCriteria={(val) => /^0x[a-fA-F0-9]{40}$/.test(val)}
         errorText="Incorrect wallet format."
     />
-
 </div>
 
 <style lang="postcss">
