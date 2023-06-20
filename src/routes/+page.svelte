@@ -1,5 +1,5 @@
 <script>
-    import TextField from "../components/TextField.svelte";
+    import TextField from '../components/TextField.svelte';
 </script>
 
 <svelte:head>
@@ -14,6 +14,6 @@
 
 <style lang="postcss">
     :global(html) {
-        background-color: #1E1E1E;
+        background-color: #1e1e1e;
     }
 </style>
