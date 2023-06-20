@@ -1,4 +1,5 @@
 <script>
+    import TextField from "../components/TextField.svelte";
 </script>
 
 <svelte:head>
@@ -8,10 +9,11 @@
 
 <div>
     <h1 class="text-3xl font-bold underline">Hello world!</h1>
+    <TextField textFieldText="Enter Recipient Address or EOS Account" />
 </div>
 
 <style lang="postcss">
     :global(html) {
-        background-color: theme(colors.green.800);
+        background-color: #1E1E1E;
     }
 </style>
