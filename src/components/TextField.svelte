@@ -12,7 +12,7 @@
     let isFocused = false;
     let isValid = true;
 
-    const emptyState = 
+    const emptyState =
         'w-full h-68px font-suisse text-18px text-left bg-transparent border border-gray-600 text-white focus:outline-none transition duration-500 ease-in-out rounded-lg';
     const focusedState =
         'w-full h-68px font-suisse text-18px text-left bg-transparent border border-purple-500 text-white focus:outline-none transition duration-500 ease-in-out rounded-lg';
@@ -48,14 +48,13 @@
     $: handleState = () => {
         if (value === '') {
             return emptyState;
-        } 
+        }
 
         if (isFocused) {
             return focusedState;
         }
         return isValid ? emptyState : filledState;
-    }
-
+    };
 </script>
 
 <div class="relative h-68px w-602px absolute top-52 left-5 p-4 rounded-lg flex items-center">
